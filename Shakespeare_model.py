@@ -13,8 +13,10 @@ def load_text(file_path):
 def preprocess_text(text):
     """Cleans text: converts to lowercase, removes punctuation, and tokenizes words."""
     text = text.lower()
-    text = text.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
-    tokens = nltk.word_tokenize(text)  # Tokenize
+    # Removing punctuation from text
+    text = text.translate(str.maketrans('', '', string.punctuation)) 
+    # Tokenizing the text
+    tokens = nltk.word_tokenize(text)  
     return tokens
 
 def generate_bigrams(tokens):
@@ -28,7 +30,8 @@ def create_bigram_counts(bigrams):
     
     for i in range(len(bigrams) - 1):
         bigram = bigrams[i]
-        next_word = bigrams[i + 1][1]  # The next token that follows the bigram
+        # The next token that follows the bigram
+        next_word = bigrams[i + 1][1] 
         bigram_dict[bigram][next_word] += 1
     
     return bigram_dict
