@@ -34,8 +34,8 @@ def create_bigram_counts(bigrams):
     return bigram_dict
 
 if __name__ == "__main__":
-    # Load and process text
-    file_path = "shakespeare.txt"  # Ensure this file exists in your project root
+    # Load and process text from project root
+    file_path = "shakespeare.txt" 
     text = load_text(file_path)
     tokens = preprocess_text(text)
     
@@ -45,5 +45,5 @@ if __name__ == "__main__":
 
     # Print sample output
     print("Sample Bigram Count Dictionary:")
-    for bigram, next_word_counts in list(bigram_counts.items())[:5]:  # Print first 5 entries
+    for bigram, next_word_counts in list(bigram_counts.items())[:10]:  # Print first 5 entries
         print(f"{bigram}: {dict(next_word_counts)}")
