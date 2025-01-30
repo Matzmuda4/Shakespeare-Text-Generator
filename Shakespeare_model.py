@@ -48,5 +48,24 @@ if __name__ == "__main__":
 
     # Print sample output
     print("Sample Bigram Count Dictionary:")
-    for bigram, next_word_counts in list(bigram_counts.items())[:10]:  # Print first 5 entries
+    for bigram, next_word_counts in list(bigram_counts.items())[:10]:
         print(f"{bigram}: {dict(next_word_counts)}")
+
+def compute_bigram_probabilities(bigram_counts):
+    """Converts bigram counts into probabilities."""
+    bigram_probs = {}
+
+    for bigram, next_word_counts in bigram_counts.items():
+        total_count = sum(next_word_counts.values())  # Total occurrences of this bigram
+        bigram_probs[bigram] = {word: count / total_count for word, count in next_word_counts.items()}
+    
+    return bigram_probs
+
+
+# Compute probabilities using the previously created bigram_counts dictionary
+bigram_probs = compute_bigram_probabilities(bigram_counts)
+
+# Print sample output
+print("Sample Bigram Probability Dictionary:")
+for bigram, next_word_probs in list(bigram_probs.items())[:5]:  # Print first 5 entries
+    print(f"{bigram}: {next_word_probs}")
