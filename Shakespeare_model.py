@@ -1,6 +1,7 @@
 import nltk
 import string
 from collections import defaultdict
+import random
 # Download NLTK tokenizer if not already installed
 nltk.download('punkt')
 nltk.download('punkt_tab')
@@ -46,10 +47,10 @@ if __name__ == "__main__":
     bigrams = generate_bigrams(tokens)
     bigram_counts = create_bigram_counts(bigrams)
 
-    # Print sample output
-    print("Sample Bigram Count Dictionary:")
-    for bigram, next_word_counts in list(bigram_counts.items())[:10]:
-        print(f"{bigram}: {dict(next_word_counts)}")
+    # # Print sample output
+    # print("Sample Bigram Count Dictionary:")
+    # for bigram, next_word_counts in list(bigram_counts.items())[:10]:
+    #     print(f"{bigram}: {dict(next_word_counts)}")
 
 def compute_bigram_probabilities(bigram_counts):
     """Converts bigram counts into probabilities."""
@@ -65,18 +66,38 @@ def compute_bigram_probabilities(bigram_counts):
 # Compute probabilities using the previously created bigram_counts dictionary
 bigram_probs = compute_bigram_probabilities(bigram_counts)
 
-# Print sample output
-print("Sample Bigram Probability Dictionary:")
-for bigram, next_word_probs in list(bigram_probs.items())[:5]:  # Print first 5 entries
-    print(f"{bigram}: {next_word_probs}")
+# # Print sample output
+# print("Sample Bigram Probability Dictionary:")
+# for bigram, next_word_probs in list(bigram_probs.items())[:5]:  # Print first 5 entries
+#     print(f"{bigram}: {next_word_probs}")
 
-# Test with a specific bigram
+# # Test with a specific bigram
+# test_bigram = ('to', 'be')
+
+# if test_bigram in bigram_probs:
+#     print(f"Probabilities for {test_bigram}: {bigram_probs[test_bigram]}")
+# else:
+#     print(f"Bigram {test_bigram} not found in the dataset.")
+
+def sample_next_token(bigram, bigram_probs):
+    """
+    Samples the next token based on the probability distribution of a given bigram.
+    """
+    if bigram not in bigram_probs:
+        # Return None if bigram is not in dictionary
+        return None 
+    # Possible next words
+    next_words = list(bigram_probs[bigram].keys())
+    # Corresponding probabilities 
+    probabilities = list(bigram_probs[bigram].values()) 
+    # Sample one word
+    return random.choices(next_words, probabilities)[0] 
+
+# Test the sampling function
 test_bigram = ('to', 'be')
 
-if test_bigram in bigram_probs:
-    print(f"Probabilities for {test_bigram}: {bigram_probs[test_bigram]}")
+sampled_word = sample_next_token(test_bigram, bigram_probs)
+if sampled_word:
+    print(f"Sampled next word after {test_bigram}: {sampled_word}")
 else:
     print(f"Bigram {test_bigram} not found in the dataset.")
-
-
-
