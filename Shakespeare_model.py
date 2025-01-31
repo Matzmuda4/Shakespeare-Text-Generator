@@ -69,3 +69,14 @@ bigram_probs = compute_bigram_probabilities(bigram_counts)
 print("Sample Bigram Probability Dictionary:")
 for bigram, next_word_probs in list(bigram_probs.items())[:5]:  # Print first 5 entries
     print(f"{bigram}: {next_word_probs}")
+
+# Test with a specific bigram
+test_bigram = ('to', 'be')
+
+if test_bigram in bigram_probs:
+    print(f"Probabilities for {test_bigram}: {bigram_probs[test_bigram]}")
+else:
+    print(f"Bigram {test_bigram} not found in the dataset.")
+
+
+
