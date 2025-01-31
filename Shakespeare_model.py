@@ -101,3 +101,35 @@ if sampled_word:
     print(f"Sampled next word after {test_bigram}: {sampled_word}")
 else:
     print(f"Bigram {test_bigram} not found in the dataset.")
+
+def generate_text_from_bigram(start_bigram, num_words, bigram_probs):
+    """
+    Generates text by starting with an initial bigram and sampling words iteratively.
+    
+    Parameters:
+        start_bigram (tuple): The initial bigram (word1, word2).
+        num_words (int): The number of words to generate.
+        bigram_probs (dict): Dictionary containing bigram probability distributions.
+    
+    Returns:
+        str: The generated text.
+    """
+    if start_bigram not in bigram_probs:
+        return "Bigram not found in dataset."
+    
+    generated_words = list(start_bigram)  # Start with the initial bigram
+
+    for _ in range(num_words - 2):  # Already have 2 words in the bigram
+        next_word = sample_next_token((generated_words[-2], generated_words[-1]), bigram_probs)
+        if next_word is None:  # Stop if no next word is found
+            break
+        generated_words.append(next_word)
+
+    return ' '.join(generated_words)  # Convert list to string
+
+# Test the text generation function
+test_start_bigram = ('to', 'be')
+generated_text = generate_text_from_bigram(test_start_bigram, 50, bigram_probs)
+
+print("Generated Text:")
+print(generated_text)
