@@ -5,6 +5,7 @@ A text generation model that works with 2-grams/3-grams/4-grams to imitate the s
 1. Create a Virtual Environment from terminal ```python -m venv venv``` and activate with ```venv\Scripts\activate``` for windows and ```source venv/bin/activate``` for Mac/linux
 2. Install the dependancies ```pip install -r requirements.txt```
 3. Run the Shakespeare_model.py by running ```python Shakespeare_model.py ```
+4. Run the test.py Test cases by running ```python test.py ```
 
 
 ## Approach and methodologies
